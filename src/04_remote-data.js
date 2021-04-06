@@ -18,22 +18,23 @@ async function solution () {
     .map(response => response.body)
     .map(JSON.parse)
 
-  const accountedForUserIds = []
+  const todosAccountedFor = []
 
   for (const user of users) {
-    const hasCompleted = todos.find(todo => {
+    const completed = todos.filter(todo => {
       return (
         todo.completed === true &&
         todo.userId === user.id
       )
-    })
+    }).length
 
-    if (hasCompleted && !accountedForUserIds.includes(user.id)) {
-      accountedForUserIds.push(user)
-    }
+    todosAccountedFor.push({
+      username: user.username,
+      completed
+    })
   }
 
-  return accountedForUserIds
+  return todosAccountedFor
 }
 
 module.exports = solution

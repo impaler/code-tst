@@ -9,4 +9,8 @@ test('all users have been accounted for', async () => {
 
   // Assert
   expect(actual.length).toBe(expected)
+  expect.arrayContaining(expect.objectContaining({
+    username: expect.any(String),
+    completed: expect.any(Number)
+  }))
 })
