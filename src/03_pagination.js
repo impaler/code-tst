@@ -5,7 +5,20 @@
  * @param {Array<string>} pageData
  */
 function solution (pageNumber, itemsPerPage, pageData) {
+  const start = pageNumber <= 0 ? 0 : (pageNumber - 1) * itemsPerPage
+  let end = itemsPerPage
+  const itemCount = start + end
+  const hasPartialResults = start < pageData.length
 
+  if (itemCount > pageData.length && !hasPartialResults) {
+    return null
+  }
+
+  if (hasPartialResults && itemCount > pageData.length) {
+    end = pageData.length - start
+  }
+
+  return [...pageData].splice(start, end)
 }
 
 const data = [
